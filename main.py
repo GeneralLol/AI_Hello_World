@@ -5,7 +5,7 @@ def main():
     #Generate 100 individuals in the population with previously saved file. 
     indivList = []
     filePath = "data/"
-    for i in range(1000):
+    for i in range(10000):
         filePath = "data/" + str(i) + ".txt"
         indivList.append(Indiv(tgtStr, filePath))
     
@@ -23,10 +23,10 @@ def main():
         
         #Overwrite the lower half of the list by crossing the upper half. 
         for i in range(int(len(indivList) / 2), int(len(indivList))):
-            indivList[i] = cross(indivList[i - int(len(indivList)/2)], indivList[i - int(len(indivList) / 2) + 1])
+            indivList[i] = cross(indivList[i - int(len(indivList) / 2)], indivList[i - int(len(indivList) / 2) + 1])
             
         generation += 1
-        if (generation % 20 == 0):
+        if (generation % 10 == 0):
             save_progress(indivList)
         
 if (__name__ == "__main__"):

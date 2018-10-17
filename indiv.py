@@ -99,6 +99,7 @@ class Indiv:
         possibilityCache = 0
         for i in range(self.chanceMut):
             randIndex = random.randint(0, 95)
+            '''
             upperCache = int(self.charPos[randIndex]+5)
             lowerCache = int(self.charPos[randIndex]-5)
             if (self.charPos[randIndex] >= 5): 
@@ -107,8 +108,8 @@ class Indiv:
                 possibilityCache = random.randint(int(lowerCache, self.charPos[randIndex]))
             elif (self.charPos[randIndex] < 5):
                 possibilityCache = random.randint(0, upperCache)
-                
-            self.charPos[randIndex] = possibilityCache
+            '''
+            self.charPos[randIndex] = random.uniform(0, 100)
     
     #end_generation: Decide whether the current generation is worth keeping. 
     def end_generation(self):
