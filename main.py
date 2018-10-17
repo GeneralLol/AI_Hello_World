@@ -5,7 +5,7 @@ def main():
     #Generate 100 individuals in the population with previously saved file. 
     indivList = []
     filePath = "data/"
-    for i in range(100):
+    for i in range(1000):
         filePath = "data/" + str(i) + ".txt"
         indivList.append(Indiv(tgtStr, filePath))
     
@@ -26,7 +26,7 @@ def main():
             indivList[i] = cross(indivList[i - int(len(indivList)/2)], indivList[i - int(len(indivList) / 2) + 1])
             
         generation += 1
-        if (generation % 10000 == 0):
+        if (generation % 20 == 0):
             save_progress(indivList)
         
 if (__name__ == "__main__"):
