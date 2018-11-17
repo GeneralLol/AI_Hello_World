@@ -28,10 +28,14 @@ def main():
         bestFit = populationList[0]
         print (generation, "\t|", bestFit.genStr, "|\t", bestFit.fitness, "\n")
         
+        if (bestFit.fitness == 0): 
+            print ("End of Simulation!\n")
+            break
+        
         start = int(populationSize / 2)
         end   = populationSize
         for i in range(start, end):
-            populationList[i] = cross(populationList[0], populationList[i - start])
+            populationList[i] = cross(populationList[i - start], populationList[i - start + 1])
         
 if (__name__ == "__main__"):
     main()

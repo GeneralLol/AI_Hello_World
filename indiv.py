@@ -27,7 +27,7 @@ class Indiv:
     def __init__ (self, tarStr, filePath = ""):
         #Generate the instance fields with whatever is entered. 
         self.tarStr = tarStr
-        self.fitness= 25565
+        self.fitness= 999999
         self.genStr = ""
         self.strLen = random.randint(2, 100)
         self.mutatChance = random.randint(0, 10)
@@ -136,20 +136,20 @@ class Indiv:
         #Go through the overlapping areas of the strings. 
         while ((index < len(self.tarStr)) and (index < self.strLen)):
             try: 
-                tempFitness += ord(self.tarStr[index]) ^ 2 \
-                                + ord(self.genStr[index]) ^ 2
+                tempFitness += (ord(self.tarStr[index]) \
+                                - ord(self.genStr[index])) ** 2
             except: 
                 pass
             index += 1
         
         #Go through the string left in tarStr. 
         while (index < len(self.tarStr)):
-            tempFitness += ord(self.tarStr[index]) ^ 2
+            tempFitness += ord(self.tarStr[index]) ** 2
             index += 1
         
         #Go through the string left in genStr. 
         while (index < len(self.genStr)): 
-            tempFitness += ord(self.genStr[index]) ^ 2
+            tempFitness += ord(self.genStr[index]) ** 2
             index += 1
             
         self.fitness = tempFitness
