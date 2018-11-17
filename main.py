@@ -1,33 +1,38 @@
 from indiv import *
 
+
+#main
 def main():
+    random.seed()
     tgtStr = "Hello, World!"
-    #Generate 100 individuals in the population with previously saved file. 
-    indivList = []
-    filePath = "data/"
-    for i in range(10000):
-        filePath = "data/" + str(i) + ".txt"
-        indivList.append(Indiv(tgtStr, filePath))
-    
+    populationSize = 1000
+    populationList = [None]
+    THREAD_COUNT = 4
     generation = 0
+    
+    populationList.pop(0)
+    
+    for i in range(populationSize):
+        populationList.append(Indiv(tgtStr))
+     
+    #TODO: Add multi-threading. 
     while (1):
-        
-        #Evaluate every individual in the list. 
-        for i in range(len(indivList)):
-            indivList[i].eval()
-            indivList[i].end_generation()
-        #Sort the list by fitness. 
-        indivList.sort(key=fitness)
-        #Print out the best fit of this generation. 
-        print(generation, "\t|", indivList[0].genStr, "|\t", indivList[0].prevFitness, "\n")
-        
-        #Overwrite the lower half of the list by crossing the upper half. 
-        for i in range(int(len(indivList) / 2), int(len(indivList))):
-            indivList[i] = cross(indivList[i - int(len(indivList) / 2)], indivList[i - int(len(indivList) / 2) + 1])
-            
         generation += 1
-        if (generation % 10 == 0):
-            save_progress(indivList)
+        
+        for i in range(populationSize):
+            populationList[i].mutate()
+            populationList[i].end_generation()
+        
+        populationList.sort(key=fitness)
+        
+        bestFit = populationList[0]
+        print (generation, "\t|", bestFit.genStr, "|\t", bestFit.fitness, "\n")
+        
+        start = int(populationSize / 2)
+        end   = populationSize
+        for i in range(start, end):
+            populationList[i] = cross(populationList[0], populationList[i - start])
         
 if (__name__ == "__main__"):
     main()
+
